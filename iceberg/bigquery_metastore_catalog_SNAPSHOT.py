@@ -23,19 +23,23 @@ spark = (
 spark.conf.set("viewsEnabled","true")
 
 
-# df = (
-#     spark.read
-#     .format("bigquery")
-#     .option("table", "cf-data-analytics.iceberg.wiki_nc")
-#     .load()
-#     .filter(F.to_date(F.col("datehour")) == "2024-07-09")
-# )
+df = (
+    spark.read
+    .format("bigquery")
+    .option("table", "cf-data-analytics.iceberg.wiki_nc")
+    .load()
+    .filter(F.to_date(F.col("datehour")) == "2024-07-09")
+)
 
 # distinct_title_count = df.select("title").distinct().count()
 # print(distinct_title_count)
 
 spark.sql("USE `bl_catalog`;")
 spark.sql("USE NAMESPACE iceberg;")
+
+df.show()
+
+df.sh()
 
 
 df = spark.sql("SHOW TABLES;")

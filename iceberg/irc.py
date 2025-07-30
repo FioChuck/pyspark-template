@@ -18,6 +18,7 @@ def get_simple_gcp_access_token():
         return None
 
 access_token = get_simple_gcp_access_token()
+print(access_token)
 
 spark = (
     SparkSession.builder.appName("BigLake Metastore Iceberg")
@@ -26,7 +27,7 @@ spark = (
         "spark.jars.packages",
         "com.google.cloud.spark:spark-3.5-bigquery:0.42.2"
     )
-    .config("spark.jars", "gcs-connector-hadoop3-2.2.28-shaded.jar,iceberg-spark-runtime-3.5_2.13-1.9.2.jar")
+    .config("spark.jars", "gcs-connector-hadoop3-2.2.28-shaded.jar,iceberg-spark-runtime-3.5_2.12-1.9.2.jar")
     .config("spark.eventLog.dir", "gs://cf-phs/spark-job-history")
     .config("spark.eventLog.enabled", "true")
     .config("spark.hadoop.google.cloud.auth.type", "SERVICE_ACCOUNT_JSON_KEYFILE")
